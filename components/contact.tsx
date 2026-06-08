@@ -5,7 +5,9 @@ import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 
 export function Contact() {
   return (
-    <section id="contact" className="py-32 bg-[#030304]">
+    <section id="contact" className="relative py-32 bg-[#030304] overflow-hidden">
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] light-leak" />
+      
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Info Side */}

@@ -1,169 +1,92 @@
 'use client';
 
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 
-const portfolioCollections = [
-  {
-    id: 1,
-    title: 'Urban Architecture',
-    description: 'Exploring the geometry and elegance of modern cityscapes through minimalist composition and dramatic lighting.',
-    category: 'Architecture',
-    image: '/portfolio-1.jpg',
-    imageCount: 24,
-  },
-  {
-    id: 2,
-    title: 'Wilderness & Landscapes',
-    description: 'Capturing the raw beauty of nature, from mountain peaks to serene valleys, showcasing earth&apos;s untamed majesty.',
-    category: 'Landscape',
-    image: '/portfolio-2.jpg',
-    imageCount: 18,
-  },
-  {
-    id: 3,
-    title: 'Human Connections',
-    description: 'Intimate portraits that reveal character, emotion, and the stories written in faces and expressions.',
-    category: 'Portrait',
-    image: '/portfolio-3.jpg',
-    imageCount: 32,
-  },
-  {
-    id: 4,
-    title: 'Commercial & Branding',
-    description: 'Professional product and brand photography that elevates visual identity and tells compelling brand stories.',
-    category: 'Commercial',
-    image: '/portfolio-4.jpg',
-    imageCount: 16,
-  },
-  {
-    id: 5,
-    title: 'Street & Documentary',
-    description: 'Unscripted moments of urban life, candid interactions, and the poetry found in everyday scenes.',
-    category: 'Documentary',
-    image: '/portfolio-5.jpg',
-    imageCount: 28,
-  },
-  {
-    id: 6,
-    title: 'Conceptual & Fine Art',
-    description: 'Artistic explorations pushing creative boundaries, blending reality with imagination and emotion.',
-    category: 'Fine Art',
-    image: '/portfolio-6.jpg',
-    imageCount: 22,
-  },
+const projects = [
+  { id: 1, title: 'Obsidian Lines', category: 'Architecture', image: '/hero-1.png', size: 'tall' },
+  { id: 2, title: 'Golden Hour', category: 'Landscape', image: '/portfolio-1.png', size: 'wide' },
+  { id: 3, title: 'Deep Soul', category: 'Portrait', image: '/portfolio-2.png', size: 'normal' },
+  { id: 4, title: 'Midnight Rain', category: 'Street', image: '/portfolio-3.png', size: 'normal' },
+  { id: 5, title: 'Velvet Dreams', category: 'Fashion', image: '/portfolio-4.png', size: 'wide' },
+  { id: 6, title: 'Silent Peak', category: 'Nature', image: '/portfolio-1.png', size: 'tall' },
 ];
 
 export default function PortfolioPage() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
   return (
-    <>
+    <main className="min-h-screen bg-[#030304] overflow-hidden relative">
+      {/* Decorative Leaks */}
+      <div className="absolute top-0 right-0 w-[50%] h-[50%] light-leak" />
+      <div className="absolute bottom-0 left-[-10%] w-[40%] h-[40%] light-leak opacity-10" />
+
       <Header />
-      <main className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="py-20 border-b border-border">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <Link href="/#portfolio" className="text-accent text-sm tracking-[0.2em] uppercase mb-6 inline-block hover:text-white transition-colors">
-                ← Back to Home
-              </Link>
-              <h1 className="text-6xl md:text-7xl font-light text-foreground mb-6 text-balance">
-                Complete Portfolio Collections
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                Explore our full catalog of curated photography collections, each representing a unique perspective on visual storytelling across multiple genres and disciplines.
-              </p>
-            </div>
-          </div>
-        </section>
+      
+      {/* Hero Section of Portfolio */}
+      <section className="pt-40 pb-20 px-6">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <h1 className="text-7xl md:text-9xl font-light text-white tracking-tighter mb-10">
+              The <span className="italic font-serif text-primary">Archive</span>
+            </h1>
+            <p className="text-xl text-gray-500 font-light max-w-2xl leading-relaxed">
+              A curated collection of visual experiments, commercial assignments, and personal narratives captured over the last decade.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Collections Grid */}
-        <section className="py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {portfolioCollections.map((collection) => (
-                <div
-                  key={collection.id}
-                  className="group cursor-pointer"
-                  onMouseEnter={() => setHoveredId(collection.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                >
-                  {/* Image Container */}
-                  <div className="relative overflow-hidden bg-secondary aspect-video mb-6">
-                    <Image
-                      src={collection.image}
-                      alt={collection.title}
-                      fill
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/10" />
-
-                    {/* Hover Overlay */}
-                    <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${
-                      hoveredId === collection.id ? 'opacity-100' : 'opacity-0'
-                    }`}>
-                      <div className="text-center">
-                        <p className="text-white text-sm tracking-widest uppercase mb-2">View Collection</p>
-                        <svg className="w-8 h-8 text-accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 6l6 6m0 0l-6 6m6-6H7" />
-                        </svg>
-                      </div>
-                    </div>
+      {/* Gallery Section */}
+      <section className="pb-32 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className={`relative group cursor-pointer overflow-hidden rounded-3xl ${
+                  project.size === 'wide' ? 'md:col-span-2 aspect-[16/9]' : 
+                  project.size === 'tall' ? 'row-span-2 aspect-[3/4]' : 
+                  'aspect-square'
+                }`}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                />
+                
+                {/* Floating Info */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between p-10 backdrop-blur-[2px]">
+                  <div className="flex justify-between items-start">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-white/60">0{project.id}</span>
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-primary font-bold">{project.category}</span>
                   </div>
-
-                  {/* Content */}
+                  
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-2xl font-light text-foreground group-hover:text-accent transition-colors">
-                        {collection.title}
-                      </h3>
-                      <span className="text-accent text-sm tracking-widest uppercase px-3 py-1 border border-accent/30 group-hover:border-accent transition-colors">
-                        {collection.category}
-                      </span>
-                    </div>
-
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                      {collection.description}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                      <span className="text-sm text-muted-foreground tracking-widest uppercase">
-                        {collection.imageCount} Photos
-                      </span>
-                      <Link href={`/portfolio/${collection.id}`} className="text-accent text-sm tracking-widest uppercase hover:translate-x-1 transition-transform inline-block">
-                        Explore →
-                      </Link>
-                    </div>
+                    <h3 className="text-3xl font-light text-white mb-2 uppercase tracking-tight">{project.title}</h3>
+                    <motion.div 
+                      className="w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-700"
+                    />
                   </div>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="py-24 border-t border-border bg-secondary">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-5xl md:text-6xl font-light text-foreground mb-6 text-balance">
-              Ready to Work Together?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Let&apos;s create something extraordinary. Whether it&apos;s a new project or a collaboration, we&apos;d love to hear from you.
-            </p>
-            <Link
-              href="/#contact"
-              className="inline-block px-10 py-4 border-2 border-accent text-accent hover:bg-accent hover:text-background transition-all duration-300 tracking-widest uppercase text-sm"
-            >
-              Get in Touch
-            </Link>
-          </div>
-        </section>
-      </main>
       <Footer />
-    </>
+    </main>
   );
 }

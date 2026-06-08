@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -17,9 +18,10 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'About', href: '/#about' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
@@ -33,32 +35,32 @@ export function Header() {
         }`}
       >
         {/* Logo */}
-        <a href="/" className="group flex items-center gap-2">
+        <Link href="/" className="group flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-black font-bold text-lg group-hover:rotate-12 transition-transform duration-500">
             F
           </div>
           <span className="text-xl font-light tracking-tighter text-white">
             FRAME<span className="font-bold text-primary">FLOW</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-12">
           {navLinks.map((link) => (
-            <a 
+            <Link 
               key={link.name} 
               href={link.href}
               className="text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-primary transition-colors duration-300"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <a 
-            href="#contact" 
+          <Link 
+            href="/#contact" 
             className="px-6 py-2 border border-white/20 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-white hover:bg-white hover:text-black transition-all duration-500"
           >
             Work with us
-          </a>
+          </Link>
         </div>
         {/* Mobile Menu Toggle */}
         <button 
@@ -79,22 +81,22 @@ export function Header() {
           >
             <div className="flex flex-col gap-8 items-center">
               {navLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.name} 
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-lg font-light tracking-widest uppercase text-white"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <a 
-                href="#contact" 
+              <Link 
+                href="/#contact" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full text-center py-4 bg-primary text-black font-bold tracking-widest uppercase rounded-xl"
               >
                 Work with us
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

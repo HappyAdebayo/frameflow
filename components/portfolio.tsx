@@ -46,7 +46,9 @@ export function Portfolio() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section id="portfolio" className="py-32 bg-[#030304]">
+    <section id="portfolio" className="relative py-32 bg-[#030304] overflow-hidden ">
+      <div className="absolute top-1/2 right-[-10%] w-[40%] h-[40%] light-leak opacity-10" />
+      
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">

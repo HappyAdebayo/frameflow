@@ -5,7 +5,9 @@ import Image from 'next/image';
 
 export function About() {
   return (
-    <section id="about" className="py-32 bg-[#030304] overflow-hidden">
+    <section id="about" className="relative py-32 bg-[#030304] overflow-hidden">
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] light-leak" />
+      
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Visual Side */}
@@ -51,7 +53,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-6xl font-light text-white mb-10 tracking-tighter leading-tight"
+              className="text-5xl md:text-7xl font-light text-white mb-10 tracking-tighter leading-tight"
             >
               Crafting <span className="italic font-serif text-primary">Timeless</span> <br />
               Visual Excellence

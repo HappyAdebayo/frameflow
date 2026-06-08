@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function Hero() {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black py-32">
       {/* Background Image with Ken Burns Effect */}
       <motion.div 
         initial={{ scale: 1.2, opacity: 0 }}
@@ -25,6 +26,10 @@ export function Hero() {
       {/* Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-[#030304] z-[1]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] opacity-60 z-[1]" />
+
+      {/* Light Leaks */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] light-leak" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] light-leak opacity-10" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
@@ -58,18 +63,19 @@ export function Hero() {
         </motion.p>
 
         <motion.div 
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
         >
-          <a href="#portfolio" className="group relative px-10 py-4 bg-primary text-black text-xs tracking-widest uppercase font-bold overflow-hidden transition-all duration-300 hover:scale-105">
-            <span className="relative z-10">Explore Work</span>
-            <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-          </a>
-          <a href="#contact" className="px-10 py-4 border border-white/20 text-white text-xs tracking-widest uppercase hover:border-primary hover:text-primary transition-all duration-500 glass">
-            Start a Project
-          </a>
+          <Link href="/portfolio" className="group relative px-10 py-5 bg-primary text-black text-[10px] tracking-[0.3em] uppercase font-bold overflow-hidden transition-all duration-500">
+            <span className="relative z-10">Explore Archive</span>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+          </Link>
+          <Link href="/#contact" className="group relative px-10 py-5 border border-white/10 text-white text-[10px] tracking-[0.3em] uppercase font-bold overflow-hidden transition-all duration-500 backdrop-blur-md">
+            <span className="relative z-10">Start a Project</span>
+            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+          </Link>
         </motion.div>
       </div>
 
