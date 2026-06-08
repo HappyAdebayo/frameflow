@@ -1,54 +1,90 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
-    <section className="relative w-full h-[90vh] flex items-center justify-center bg-black overflow-hidden">
-      {/* Background Image - Placeholder */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-background opacity-90" />
-      
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_24%,rgba(212,175,55,.05)_25%,rgba(212,175,55,.05)_26%,transparent_27%,transparent_74%,rgba(212,175,55,.05)_75%,rgba(212,175,55,.05)_76%,transparent_77%,transparent),linear-gradient(90deg,transparent_24%,rgba(212,175,55,.05)_25%,rgba(212,175,55,.05)_26%,transparent_27%,transparent_74%,rgba(212,175,55,.05)_75%,rgba(212,175,55,.05)_76%,transparent_77%,transparent)] bg-[length:50px_50px]" />
-      </div>
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Background Image with Ken Burns Effect */}
+      <motion.div 
+        initial={{ scale: 1.2, opacity: 0 }}
+        animate={{ scale: 1, opacity: 0.6 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+        className="absolute inset-0 z-0"
+      >
+        <Image
+          src="/hero-1.png"
+          alt="Cinematic Architecture"
+          fill
+          className="object-cover"
+          priority
+        />
+      </motion.div>
+
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-[#030304] z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] opacity-60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-accent text-sm tracking-[0.2em] uppercase mb-6">Visual Storytelling</p>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6">
-            Capturing <span className="text-accent">Moments</span>
-          </h1>
-          <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-            Premium photography that transforms ordinary moments into extraordinary visual narratives
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#portfolio" className="px-8 py-3 bg-accent text-black text-sm tracking-widest uppercase font-medium hover:bg-opacity-90 transition-all">
-              View Portfolio
-            </a>
-            <a href="#contact" className="px-8 py-3 border border-accent text-accent text-sm tracking-widest uppercase hover:bg-accent hover:text-black transition-all">
-              Get in Touch
-            </a>
-          </div>
-        </div>
+      <div className="relative z-10 container mx-auto px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <span className="inline-block text-primary text-xs tracking-[0.4em] uppercase mb-8 font-medium">
+            Premiere Photography Studio
+          </span>
+        </motion.div>
+
+        <motion.h1 
+          className="text-6xl md:text-8xl lg:text-9xl font-light text-white leading-tight mb-8 tracking-tighter"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Elevating <br />
+          <span className="text-gradient-gold italic font-serif">Aesthetics</span>
+        </motion.h1>
+
+        <motion.p 
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-16 font-light leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          We capture the essence of light and geometry to tell stories that transcend time and space.
+        </motion.p>
+
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
+        >
+          <a href="#portfolio" className="group relative px-10 py-4 bg-primary text-black text-xs tracking-widest uppercase font-bold overflow-hidden transition-all duration-300 hover:scale-105">
+            <span className="relative z-10">Explore Work</span>
+            <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          </a>
+          <a href="#contact" className="px-10 py-4 border border-white/20 text-white text-xs tracking-widest uppercase hover:border-primary hover:text-primary transition-all duration-500 glass">
+            Start a Project
+          </a>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
-          <svg className="w-6 h-6 text-accent animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
-      </div>
+      <motion.div 
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 cursor-pointer"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.6 }}
+        transition={{ delay: 2, duration: 1 }}
+        onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+      >
+        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
+        <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase">Scroll</span>
+      </motion.div>
     </section>
   );
 }
+

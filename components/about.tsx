@@ -1,63 +1,93 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export function About() {
   return (
-    <section id="about" className="py-24 bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Column - Image */}
+    <section id="about" className="py-32 bg-[#030304] overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Visual Side */}
           <div className="relative">
-            <div className="relative bg-black aspect-square overflow-hidden group cursor-pointer">
-              <Image
-                src="/about-hero.jpg"
-                alt="Photographer at work"
-                fill
-                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="relative z-10 rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[3/4]"
+            >
+              <Image 
+                src="/hero-1.png" 
+                alt="Studio" 
+                fill 
+                className="object-cover"
               />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: 50, y: 50 }}
+              whileInView={{ opacity: 0.3, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="absolute -bottom-10 -right-10 w-full h-full border-2 border-primary rounded-2xl z-0"
+            />
 
-              {/* Accent Border */}
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-2 border-accent group-hover:bottom-0 group-hover:right-0 transition-all duration-300" />
-            </div>
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 blur-[120px] rounded-full" />
           </div>
 
-          {/* Right Column - Content */}
+          {/* Text Side */}
           <div>
-            <p className="text-accent text-sm tracking-[0.2em] uppercase mb-6">About FrameFlow</p>
-            <h2 className="text-5xl md:text-6xl font-light text-foreground mb-8">
-              Crafting Visual Excellence
-            </h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-primary text-xs tracking-[0.4em] uppercase mb-6 font-medium"
+            >
+              The Studio
+            </motion.p>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-5xl md:text-6xl font-light text-white mb-10 tracking-tighter leading-tight"
+            >
+              Crafting <span className="italic font-serif text-primary">Timeless</span> <br />
+              Visual Excellence
+            </motion.h2>
             
-            <div className="space-y-6 text-muted-foreground leading-relaxed">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="space-y-6 text-gray-400 text-lg font-light leading-relaxed"
+            >
               <p>
-                FrameFlow represents a decade of dedicated visual storytelling. Every photograph is a deliberate choice—a moment where technical mastery meets artistic vision to create imagery that transcends the ordinary.
+                Founded on the principle that every frame should tell a story, FrameFlow has become a sanctuary for visual artistry. We don't just take photos; we capture the soul of the subject.
               </p>
-              
               <p>
-                We specialize in capturing authentic narratives across architecture, landscape, portrait, and commercial photography. Our approach combines meticulous attention to light, composition, and detail with an unwavering commitment to emotional authenticity.
+                Our approach blends technical mastery with intuitive creativity, resulting in imagery that resonates deeply and lasts a lifetime. Whether it's architectural precision or the raw emotion of a portrait, we bring a premiere vision to every project.
               </p>
+            </motion.div>
 
-              <p>
-                From intimate portraits that reveal the soul to expansive landscapes that breathe with life, we believe photography is a conversation between the photographer, the subject, and the viewer—one that speaks in the language of emotion.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-border">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="mt-12 grid grid-cols-2 gap-10"
+            >
               <div>
-                <p className="text-3xl font-light text-accent mb-2">500+</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">Projects Completed</p>
+                <p className="text-4xl font-light text-white mb-2">12+</p>
+                <p className="text-xs tracking-widest uppercase text-primary font-bold">Years Experience</p>
               </div>
               <div>
-                <p className="text-3xl font-light text-accent mb-2">10+</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">Years Experience</p>
+                <p className="text-4xl font-light text-white mb-2">450+</p>
+                <p className="text-xs tracking-widest uppercase text-primary font-bold">Projects Done</p>
               </div>
-              <div>
-                <p className="text-3xl font-light text-accent mb-2">25</p>
-                <p className="text-xs tracking-widest uppercase text-muted-foreground">Awards Won</p>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
